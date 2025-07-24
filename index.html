@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ボハイラ方言コプト語文法入門</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'Yu Gothic', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1000px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2, h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2em;
+            border-left: 5px solid #2a5298;
+            padding-left: 15px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-top: 25px;
+        }
+
+        .coptic-text {
+            font-family: 'New Athena Unicode', 'Antinoou', serif;
+            font-size: 1.2em;
+            color: #8B4513;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            border: 2px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .vocab-item {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2a5298;
+            transition: transform 0.2s ease;
+        }
+
+        .vocab-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2a5298, #1e3c72);
+            transition: width 0.3s ease;
+            z-index: 1000;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        li:before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #2a5298;
+            font-weight: bold;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .example-box {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .navigation {
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="slideshow-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>ボハイラ方言コプト語文法入門</h1>
+            <div style="text-align: center; margin: 40px 0;">
+                <h2 style="border: none; color: #666;">Fundamentals of Bohairic Coptic Grammar</h2>
+                <div style="font-size: 1.2em; margin-top: 30px; color: #888;">
+                    エジプト学・コプト学概論<br>
+                    <span style="font-size: 0.9em;">古代エジプト語の最終発達段階</span>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <strong>学習目標：</strong> コプト語の基本文法構造を理解し、古代エジプト文献の読解能力を身に着ける
+            </div>
+        </div>
+
+        <!-- Slide 2: Contents -->
+        <div class="slide">
+            <h2>講義内容</h2>
+            <div class="two-column">
+                <div>
+                    <h3>基礎編</h3>
+                    <ul>
+                        <li>第1課：コプト語アルファベット</li>
+                        <li>第2課：名詞分類と定冠詞</li>
+                        <li>第3課：不定冠詞と所有格</li>
+                        <li>第4課：関係詞</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>応用編</h3>
+                    <ul>
+                        <li>第5課：所有形容詞</li>
+                        <li>第6課：名詞文</li>
+                        <li>第7課：人称代名詞</li>
+                        <li>第8課：動詞時制</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Alphabet Overview -->
+        <div class="slide">
+            <h2>第1課：コプト語アルファベットの概要</h2>
+            <div class="highlight-box">
+                <h3>アルファベットの構成</h3>
+                <ul>
+                    <li><strong>31の音韻文字</strong> + 特別な数値文字 + 母音点</li>
+                    <li><strong>最初の24文字</strong>：ギリシャ語アルファベット由来</li>
+                    <li><strong>最後の7文字</strong>：デモティック文字由来</li>
+                    <li><strong>発音規則</strong>：語源（エジプト語/ギリシャ語）により変化</li>
+                </ul>
+            </div>
+            
+            <h3>字体の特徴</h3>
+            <ul>
+                <li>2世紀A.D.のギリシャ語ウンシアル（ブロック）文字を反映</li>
+                <li>ギリシャ文字の自然進化とは独立してエジプト芸術的方法で発達</li>
+                <li>宗教文献の保存において重要な役割を果たした</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: Alphabet Table -->
+        <div class="slide">
+            <h2>アルファベット表（主要文字）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>文字</th>
+                        <th>現代発音</th>
+                        <th>修正発音</th>
+                        <th>備考</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="coptic-text">Ⲁ</td>
+                        <td>"a" as in "apple"</td>
+                        <td>same</td>
+                        <td>母音</td>
+                    </tr>
+                    <tr>
+                        <td class="coptic-text">Ⲃ</td>
+                        <td>"b" as in "back" / "v" as in "vine"</td>
+                        <td>same</td>
+                        <td>子音</td>
+                    </tr>
+                    <tr>
+                        <td class="coptic-text">Ⲅ</td>
+                        <td>"g" as in "good"</td>
+                        <td>same</td>
+                        <td>子音</td>
+                    </tr>
+                    <tr>
+                        <td class="coptic-text">Ⲇ</td>
+                        <td>"th" as in "then" / "d" in proper nouns</td>
+                        <td>"d" as in "dog"</td>
+                        <td>有声歯音</td>
+                    </tr>
+                    <tr>
+                        <td class="coptic-text">Ⲉ</td>
+                        <td>"e" as in "let"</td>
+                        <td>same</td>
+                        <td>母音</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 5: Vocabulary Examples -->
+        <div class="slide">
+            <h2>語彙例</h2>
+            <div class="vocab-grid">
+                <div class="vocab-item">
+                    <div class="coptic-text">ⲃⲁⲗ</div>
+                    <div><em>baL</em></div>
+                    <div>目（eye）</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="coptic-text">ⲣⲱⲙⲓ</div>
+                    <div><em>rōmi</em></div>
+                    <div>人間（man）</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="coptic-text">ϩⲓ</div>
+                    <div><em>hi</em></div>
+                    <div>家（house）</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="coptic-text">ⲧⲁⲙⲓⲟ</div>
+                    <div><em>tamio</em></div>
+                    <div>創造する（to create）</div>
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <div class="example-title">練習課題</div>
+                上記の語彙の発音を練習し、コプト文字の形に慣れてください。
+            </div>
+        </div>
+
+        <!-- Slide 6: Noun Classification -->
+        <div class="slide">
+            <h2>第2課：名詞の性・数分類</h2>
+            <div class="highlight-box">
+                <h3>分類の基準</h3>
+                <ul>
+                    <li><strong>性別</strong>：男性（masculine）・女性（feminine）</li>
+                    <li><strong>数</strong>：単数（singular）・複数（plural）</li>
+                    <li>多くの場合、単数形と複数形に形態的区別はない</li>
+                    <li>前置冠詞が性・数の区別を提供</li>
+                </ul>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>男性</th>
+                        <th>女性</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>単数</strong></td>
+                        <td class="coptic-text">ⲓⲱⲧ（父）</td>
+                        <td class="coptic-text">ⲙⲁⲩ（母）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>複数</strong></td>
+                        <td class="coptic-text">ⲓⲟϯ（父たち）</td>
+                        <td class="coptic-text">ⲙⲁⲩ（母たち）</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 7: Definite Article -->
+        <div class="slide">
+            <h2>定冠詞システム</h2>
+            <div class="two-column">
+                <div>
+                    <h3>冠詞の種類</h3>
+                    <ul>
+                        <li><strong>強形（Strong）</strong>：強勢のある形</li>
+                        <li><strong>弱形（Weak）</strong>：無強勢の形</li>
+                        <li>常に修飾する名詞に前置</li>
+                        <li>英語の "the" に相当</li>
+                    </ul>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>型</th>
+                                <th>男性単数</th>
+                                <th>女性単数</th>
+                                <th>複数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>強形</strong></td>
+                                <td class="coptic-text">ⲡⲓ-</td>
+                                <td class="coptic-text">ϯ-</td>
+                                <td class="coptic-text">ⲛⲓ-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>弱形</strong></td>
+                                <td class="coptic-text">ⲡ-</td>
+                                <td class="coptic-text">ϯ-</td>
+                                <td class="coptic-text">ⲛ-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <div class="example-title">例文</div>
+                <span class="coptic-text">ⲡⲓⲣⲱⲙⲓ ⲛⲉⲙ ⲡⲓⲛⲟⲩⲃ</span><br>
+                <em>pi-rōmi nem pi-noub</em><br>
+                「その人と金」
+            </div>
+        </div>
+
+        <!-- Slide 8: Indefinite Article -->
+        <div class="slide">
+            <h2>第3課：不定冠詞と所有格</h2>
+            <div class="two-column">
+                <div>
+                    <h3>不定冠詞の形</h3>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>単数</th>
+                            <th>複数</th>
+                        </tr>
+                        <tr>
+                            <td><strong>一般形</strong></td>
+                            <td class="coptic-text">ⲟⲩ-</td>
+                            <td class="coptic-text">ϩⲁⲛ-</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="example-box">
+                        <div class="example-title">例</div>
+                        <span class="coptic-text">ⲟⲩⲣⲱⲙⲓ</span> 「ある人」<br>
+                        <span class="coptic-text">ϩⲁⲛⲣⲱⲙⲓ</span> 「何人かの人々」
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>所有格（単純所有）</h3>
+                    <p>前置詞 <span class="coptic-text">ⲛ̀（ⲛ̀ⲧⲉ）</span> "of" により表現</p>
+                    
+                    <div class="example-box">
+                        <div class="example-title">構造例</div>
+                        <span class="coptic-text">ⲡⲓⲏⲓ ⲙ̀ⲡⲓⲣⲱⲙⲓ</span><br>
+                        「その人の家」<br><br>
+                        <span class="coptic-text">ϯϣⲉⲣⲓ ⲛ̀ϯⲥϩⲓⲙⲓ</span><br>
+                        「その女性の娘」
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Relative Pronouns -->
+        <div class="slide">
+            <h2>第4課：関係詞</h2>
+            <div class="highlight-box">
+                <h3>関係代名詞の形</h3>
+                <div style="text-align: center; font-size: 1.5em; margin: 20px 0;">
+                    <span class="coptic-text">ⲉ-</span> &nbsp;&nbsp;&nbsp;
+                    <span class="coptic-text">ⲉⲧ-</span> &nbsp;&nbsp;&nbsp;
+                    <span class="coptic-text">ⲉⲧⲉ-</span>
+                </div>
+                <p>最も一般的な形は <strong class="coptic-text">ⲉⲧ-</strong></p>
+                <p>すべて英語で「who」「whom」「which」と翻訳される</p>
+            </div>
+            
+            <div class="two-column">
+                <div>
+                    <h3>関係詞の例文</h3>
+                    <div class="example-box">
+                        <span class="coptic-text">ⲡⲓⲣⲱⲙⲓ ⲉⲧϧⲉⲛ ⲡ̀ⲏⲓ</span><br>
+                        「家にいる男性」<br><br>
+                        <span class="coptic-text">ⲡⲉⲛⲓⲱⲧ ⲉⲧϧⲉⲛ ⲛⲓⲫⲏⲟⲩⲓ</span><br>
+                        「天におられる我らの父」
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>関係名詞</h3>
+                    <p>形容詞から名詞を形成</p>
+                    <table>
+                        <tr>
+                            <th>男性単数</th>
+                            <th>複数</th>
+                        </tr>
+                        <tr>
+                            <td class="coptic-text">ⲡⲉⲧ-</td>
+                            <td class="coptic-text">ⲛⲏⲉⲧ-</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="example-box">
+                        <span class="coptic-text">ⲡⲉⲧⲟⲩⲁⲃ</span> 「聖なる者」<br>
+                        <span class="coptic-text">ⲡⲉⲧϩⲱⲟⲩ</span> 「悪い者」
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Possessive Adjectives -->
+        <div class="slide">
+            <h2>第5課：所有形容詞</h2>
+            <p>定冠詞文字（ⲡ、ϯ、ⲛ）+ 付加された人称代名詞から構成</p>
+            
+            <table style="font-size: 0.85em;">
+                <thead>
+                    <tr>
+                        <th>人称</th>
+                        <th>男性</th>
+                        <th>女性</th>
+                        <th>複数</th>
+                        <th>意味</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>s-1-mf</td>
+                        <td class="coptic-text">ⲡⲁⲓⲱⲧ</td>
+                        <td class="coptic-text">ⲧⲁⲥⲱⲛⲓ</td>
+                        <td class="coptic-text">ⲛⲁⲓⲟϯ</td>
+                        <td>my father/sister/fathers</td>
+                    </tr>
+                    <tr>
+                        <td>s-2-m</td>
+                        <td class="coptic-text">ⲡⲉⲕⲓⲱⲧ</td>
+                        <td class="coptic-text">ⲧⲉⲕⲥⲱⲛⲓ</td>
+                        <td class="coptic-text">ⲛⲉⲕⲓⲟϯ</td>
+                        <td>your father/sister/fathers</td>
+                    </tr>
+                    <tr>
+                        <td>s-3-m</td>
+                        <td class="coptic-text">ⲡⲉϥⲓⲱⲧ</td>
+                        <td class="coptic-text">ⲧⲉϥⲥⲱⲛⲓ</td>
+                        <td class="coptic-text">ⲛⲉϥⲓⲟϯ</td>
+                        <td>his father/sister/fathers</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box">
+                <strong>凡例：</strong> s = 単数, p = 複数, m = 男性, f = 女性, mf = 男性・女性共通
+            </div>
+        </div>
+
+        <!-- Slide 11: Nominal Sentences -->
+        <div class="slide">
+            <h2>第6課：名詞文</h2>
+            <div class="highlight-box">
+                <h3>名詞文の特徴</h3>
+                <p>コプト語は中東の多くの言語と同様に、真の動詞なしに構成される完全な文を持つ</p>
+            </div>
+            
+            <div class="two-column">
+                <div>
+                    <h3>助動詞（コプラ）</h3>
+                    <table>
+                        <tr>
+                            <th>性・数</th>
+                            <th>形</th>
+                        </tr>
+                        <tr>
+                            <td>男性単数</td>
+                            <td class="coptic-text">ⲡⲉ</td>
+                        </tr>
+                        <tr>
+                            <td>女性単数</td>
+                            <td class="coptic-text">ⲧⲉ</td>
+                        </tr>
+                        <tr>
+                            <td>複数</td>
+                            <td class="coptic-text">ⲛⲉ</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div>
+                    <h3>二要素名詞文</h3>
+                    <div class="example-box">
+                        <span class="coptic-text">ⲡⲁⲓⲱⲧ ⲡⲉ</span><br>
+                        「彼は私の父である」<br><br>
+                        <span class="coptic-text">ⲧⲁⲙⲁⲩ ⲧⲉ</span><br>
+                        「彼女は私の母である」<br><br>
+                        <span class="coptic-text">ⲛⲁⲥⲏⲟⲩ ⲛⲉ</span><br>
+                        「彼らは私の兄弟である」
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Personal Pronouns -->
+        <div class="slide">
+            <h2>第7課：人称代名詞</h2>
+            <div class="two-column">
+                <div>
+                    <h3>独立人称代名詞</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>人称</th>
+                                <th>単数</th>
+                                <th>複数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1-mf</td>
+                                <td class="coptic-text">ⲁⲛⲟⲕ</td>
+                                <td class="coptic-text">ⲁⲛⲟⲛ</td>
+                            </tr>
+                            <tr>
+                                <td>2-m</td>
+                                <td class="coptic-text">ⲛ̀ⲑⲟⲕ</td>
+                                <td class="coptic-text">ⲛ̀ⲑⲱⲧⲉⲛ</td>
+                            </tr>
+                            <tr>
+                                <td>3-m</td>
+                                <td class="coptic-text">ⲛ̀ⲑⲟϥ</td>
+                                <td class="coptic-text">ⲛ̀ⲑⲱⲟⲩ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div>
+                    <h3>疑問代名詞</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>コプト語</th>
+                                <th>英語</th>
+                                <th>日本語</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="coptic-text">ⲛⲓⲙ</td>
+                                <td>who?</td>
+                                <td>誰？</td>
+                            </tr>
+                            <tr>
+                                <td class="coptic-text">ⲁϣⲅ</td>
+                                <td>what?</td>
+                                <td>何？</td>
+                            </tr>
+                            <tr>
+                                <td class="coptic-text">ⲟⲩ</td>
+                                <td>what?</td>
+                                <td>何？</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="example-box">
+                        <span class="coptic-text">ⲛⲓⲙ ⲡⲉ ⲫⲁⲓ⸮</span><br>
+                        「これは誰ですか？」
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Verb Tenses -->
+        <div class="slide">
+            <h2>第8課：動詞時制</h2>
+            <div class="highlight-box">
+                <h3>三部構造文</h3>
+                <p>コプト語の典型的な動詞文構造：</p>
+                <ol>
+                    <li><strong>動詞接頭辞</strong>（時制マーカー）</li>
+                    <li><strong>主語</strong>（名詞または代名詞）</li>
+                    <li><strong>動詞</strong></li>
+                </ol>
+            </div>
+            
+            <div class="two-column">
+                <div>
+                    <h3>第一完了時制</h3>
+                    <p>叙述的過去時制（英語の単純過去・完了時制）</p>
+                    
+                    <div class="example-box">
+                        <div class="example-title">動詞「ⲙⲟϣⲓ」（歩く）</div>
+                        <span class="coptic-text">ⲁⲓⲙⲟϣⲓ</span> 「私は歩いた」<br>
+                        <span class="coptic-text">ⲁⲕⲙⲟϣⲓ</span> 「あなたは歩いた」<br>
+                        <span class="coptic-text">ⲁϥⲙⲟϣⲓ</span> 「彼は歩いた」
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>動作の前置詞</h3>
+                    <p><span class="coptic-text">ⲉ̀-</span> 場所・人への動作</p>
+                    <p><span class="coptic-text">ϣⲁ</span> 上・人への動作</p>
+                    
+                    <div class="example-box">
+                        <span class="coptic-text">ⲁϥⲙⲟϣⲓ ⲉ̀ⲡⲉϥⲏⲓ</span><br>
+                        「彼は自分の家へ歩いた」<br><br>
+                        <span class="coptic-text">ⲁϥⲫⲱⲧ ϣⲁ ⲡⲉϥⲓⲱⲧ</span><br>
+                        「彼は父のところへ走った」
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Summary -->
+        <div class="slide">
+            <h2>コプト語文法の基礎：まとめ</h2>
+            <div class="vocab-grid">
+                <div class="vocab-item">
+                    <h3>文字体系</h3>
+                    31文字のアルファベット<br>
+                    （ギリシャ語＋デモティック由来）
+                </div>
+                <div class="vocab-item">
+                    <h3>名詞系統</h3>
+                    性・数の区別<br>
+                    定冠詞・不定冠詞システム
+                </div>
+                <div class="vocab-item">
+                    <h3>所有表現</h3>
+                    前置詞と所有形容詞による<br>
+                    複合的表現
+                </div>
+                <div class="vocab-item">
+                    <h3>文構造</h3>
+                    名詞文と動詞文の<br>
+                    二大類型
+                </div>
+                <div class="vocab-item">
+                    <h3>動詞活用</h3>
+                    人称接頭辞による<br>
+                    三部構造の時制システム
+                </div>
+                <div class="vocab-item">
+                    <h3>言語的位置</h3>
+                    後期エジプト語の最終段階<br>
+                    ギリシャ語影響下の独自性
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <strong>学習の要点：</strong> コプト語は後期エジプト語の最終段階であり、ギリシャ語の影響を受けながらも独自の文法構造を維持している。系統的な学習により、古代エジプト文献の理解が可能となる。
+            </div>
+        </div>
+
+        <!-- Slide 15: References -->
+        <div class="slide">
+            <h2>参考文献</h2>
+            <div style="font-size: 1.1em; line-height: 1.8;">
+                <ul>
+                    <li>Layton, Bentley. <em>A Coptic Grammar with Chrestomathy and Glossary: Sahidic Dialect</em>. Wiesbaden: Harrassowitz, 2000.</li>
+                    <li>Lambdin, Thomas O. <em>Introduction to Sahidic Coptic</em>. Macon, GA: Mercer University Press, 1983.</li>
+                    <li>Plisch, Uwe-Karsten. <em>Einführung in die koptische Sprache: Sahidischer Dialekt</em>. Wiesbaden: Reichert, 1999.</li>
+                    <li>本教材：<em>Fundamentals of Bohairic Coptic</em></li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px; font-size: 1.5em; color: #1e3c72;">
+                <strong>ありがとうございました</strong>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; color: #666; font-size: 0.9em;">
+                コプト語学習の継続的発展を祈念いたします
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="slideNumber">1</span> / <span id="totalSlides">15</span>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">◀ 前へ</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">次へ ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('slideNumber').textContent = currentSlide + 1;
+            document.getElementById('progressBar').style.width = ((currentSlide + 1) / totalSlides) * 100 + '%';
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            if (direction === 1 && currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            } else if (direction === -1 && currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+
+        // Add some interactive effects
+        document.querySelectorAll('.vocab-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-3px)';
+                }, 200);
+            });
+        });
+
+        // Auto-advance option (uncomment to enable)
+        // setInterval(() => {
+        //     if (currentSlide < totalSlides - 1) {
+        //         changeSlide(1);
+        //     }
+        // }, 10000); // 10 seconds per slide
+    </script>
+</body>
+</html>
